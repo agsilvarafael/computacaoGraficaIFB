@@ -5,7 +5,9 @@
  */
 package br.edu.ifb.cg.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,11 +42,19 @@ public class MatrizPoligonos {
     
     public void removePoligono(Integer indicePoligono){
         Poligono p = matriz.remove(indicePoligono);
+        //Remove os vértices da matriz
+        MatrizVertices.getInstance().removeVertices(
+                MatrizArestas.getInstance().getAresta(p.getIndiceArestaInicial()).getIndiceOrigem(), 
+                MatrizArestas.getInstance().getAresta(p.getIndiceArestaFinal()).getIndiceOrigem());
+        //Remove as arestas da matriz
         MatrizArestas.getInstance().removeArestas(
                 p.getIndiceArestaInicial(), p.getIndiceArestaFinal());
-        MatrizVertice.getInstance().removeVertices(
-                p.getArestas().get(0).getOrigem().getIndice(), 
-                p.getArestas().get(p.getLados()-1).getOrigem().getIndice());
+    }
+    
+    public ArrayList<Vertice2D> getVerticesPoligono(Integer indicePoligono){
+        Aresta a = MatrizArestas.getInstance().
+                getAresta(this.matriz.get(indicePoligono).getIndiceArestaFinal());
+        return MatrizVertices.getInstance().getVertices(a.getIndiceOrigem(),a.getIndiceDestino());
     }
     
 }
