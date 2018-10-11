@@ -7,41 +7,44 @@ package br.edu.ifb.cg.model;
 
 /**
  *
- * @author jeronimo
+ * @author Jeronimo Hermano
  */
 public class Aresta {
     
     private Integer indice;
-    private Vertice2D origem;
-    private Vertice2D destino;
+    private Integer indiceOrigem;
+    private Integer indiceDestino;
 
-    public Aresta(Vertice2D origem, Vertice2D destino) {
-        if(origem == null)
-            throw new IllegalArgumentException("origem");
-        if(destino == null)
-            throw new IllegalArgumentException("destino");
-        this.origem = origem;
-        this.destino = destino;
+    public Aresta(Integer indiceOrigem, Integer indiceDestino) {
+        this.indiceOrigem = indiceOrigem;
+        this.indiceDestino = indiceDestino;
+    }
+
+    public Aresta(Integer indice, Integer indiceOrigem, Integer indiceDestino) {
+        this.indice = indice;
+        this.indiceOrigem = indiceOrigem;
+        this.indiceDestino = indiceDestino;
     }
     
     public boolean seTocam(Aresta aresta){
-        return (this.destino.equals(aresta.getOrigem()));
-    }
-    
-    public Vertice2D getOrigem() {
-        return origem;
+        return MatrizVertices.getInstance().getVertice(this.indiceDestino).
+                equals(MatrizVertices.getInstance().getVertice(aresta.getIndiceOrigem()));
     }
 
-    public void setOrigem(Vertice2D origem) {
-        this.origem = origem;
+    public Integer getIndiceOrigem() {
+        return indiceOrigem;
     }
 
-    public Vertice2D getDestino() {
-        return destino;
+    public void setIndiceOrigem(Integer indiceOrigem) {
+        this.indiceOrigem = indiceOrigem;
     }
 
-    public void setDestino(Vertice2D destino) {
-        this.destino = destino;
+    public Integer getIndiceDestino() {
+        return indiceDestino;
+    }
+
+    public void setIndiceDestino(Integer indiceDestino) {
+        this.indiceDestino = indiceDestino;
     }
 
     public Integer getIndice() {
