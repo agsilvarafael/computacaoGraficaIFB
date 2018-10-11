@@ -5,7 +5,6 @@
  */
 package br.edu.ifb.cg.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class MatrizArestas {
     }
     
     public void addAresta(Vertice2D inicio, Vertice2D fim){
-        this.matriz.put(++maiorIndice, new Aresta(inicio, fim));
+        this.matriz.put(++maiorIndice, new Aresta(inicio.getIndice(), fim.getIndice()));
         this.matriz.get(maiorIndice).setIndice(maiorIndice);
     }
     
@@ -60,15 +59,6 @@ public class MatrizArestas {
         for (int i = start; i <= end; i++) {
             matriz.remove(i);
         }
-    }
-    
-    public List<Vertice2D> getVertices(Integer arestaInicial, Integer arestaFinal){
-        List<Vertice2D> vertices = new ArrayList<>();
-        for (int i = arestaInicial; i <= arestaFinal; i++) {
-            vertices.add(matriz.get(i).getOrigem());
-        }
-        vertices.add(matriz.get(arestaInicial).getDestino());
-        return  vertices;
     }
     
 }
