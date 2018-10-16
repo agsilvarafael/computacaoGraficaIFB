@@ -61,5 +61,12 @@ public class Envelope {
     public Poligono getPoligono() {
         return poligono;
     }
-    
+
+    public Vertice2D getMenor() {
+        return menor;
+    }
+
+    public Vertice2D getMaior() {
+        return maior;
+    }
 }
