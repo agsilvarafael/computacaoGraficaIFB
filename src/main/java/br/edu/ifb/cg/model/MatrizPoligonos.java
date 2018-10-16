@@ -17,7 +17,7 @@ import java.util.Map;
 public class MatrizPoligonos {
     
     private Integer maioIndice;
-    private Map<Integer, Poligono> matriz;
+    private Map<Integer, Poligono> matriz = new HashMap<>();
     private static MatrizPoligonos uniqueInstance;
 
     private MatrizPoligonos() {
@@ -55,6 +55,30 @@ public class MatrizPoligonos {
         Aresta a = MatrizArestas.getInstance().
                 getAresta(this.matriz.get(indicePoligono).getIndiceArestaFinal());
         return MatrizVertices.getInstance().getVertices(a.getIndiceOrigem(),a.getIndiceDestino());
+    }
+    
+    /**
+     * 
+     * @param vertices
+     * @return O índice do polígono adicionado.
+     */
+    public Integer addPoligonoPorListaDeVertices(List<Vertice2D> vertices){
+        //Adicona na matriz de vértices
+        MatrizVertices.getInstance().addVertice(vertices);
+        //Cria e adiciona na lista de arestas
+        Aresta aux;
+        Integer iAI = 0, iAF = 0;
+        for (int i = 0, j = i+1; i < vertices.size(); i++, j = (i + 1) % vertices.size()) {
+            aux = new Aresta(vertices.get(i).getIndice(), vertices.get(j).getIndice());
+            MatrizArestas.getInstance().addAresta(aux);
+            if(i == 0)
+                iAI = aux.getIndice();
+            if(j == 0)
+                iAF = aux.getIndice();
+        }
+        //Cria e salva o polígono
+        addPoligono(new Poligono(iAI, iAF));
+        return maioIndice;
     }
     
 }
