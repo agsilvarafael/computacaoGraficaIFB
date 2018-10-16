@@ -6,8 +6,6 @@
 package br.edu.ifb.cg.model;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @author Jeronimo Hermano
@@ -96,6 +94,10 @@ public class Poligono {
 
     public void setCorPreenchimento(Color corPreenchimento) {
         this.corPreenchimento = corPreenchimento;
+    }
+
+    public Envelope getEnvelope() {
+        return envelope;
     }
     
 }
