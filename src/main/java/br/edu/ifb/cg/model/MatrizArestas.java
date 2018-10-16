@@ -16,7 +16,7 @@ import java.util.Map;
 public class MatrizArestas {
     
     private Integer maiorIndice;
-    private Map<Integer, Aresta> matriz;
+    private Map<Integer, Aresta> matriz = new HashMap<>();
     private static MatrizArestas uniqueInstance;
 
     private MatrizArestas() {

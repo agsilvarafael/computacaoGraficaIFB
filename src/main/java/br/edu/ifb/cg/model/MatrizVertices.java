@@ -17,7 +17,7 @@ import java.util.Map;
 public class MatrizVertices {
 
     private Integer maiorIndice;
-    private Map<Integer, Vertice2D> matriz = null;
+    private Map<Integer, Vertice2D> matriz = new HashMap<>();
     private static MatrizVertices uniqueInstance;
 
     private MatrizVertices() {
@@ -33,7 +33,6 @@ public class MatrizVertices {
     
     public void addVertice(Integer x, Integer y){
         this.matriz.put(++maiorIndice, new Vertice2D(x, y, maiorIndice));
-//        this.matriz.get(maiorIndice).setIndice(maiorIndice);
     }
     
     public void addVertice(Vertice2D vertice){
