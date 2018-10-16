@@ -44,26 +44,36 @@ public class TransofrmacoesSobreVertices {
         if(sY <= 0)
             throw new IllegalArgumentException(sY.toString());
         
+        Integer novoXMaior = 0, novoYMaior = 0;
+        
         Envelope envelope = MatrizPoligonos.getInstance().getPoligono(indiceP).getEnvelope();
         for(Vertice2D v2 : MatrizPoligonos.getInstance().getVerticesPoligono(indiceP)){
             //Modifica apenas se o ponto não for parte da lateral esqueda do envelope
             if(!v2.getX().equals(envelope.getMenor().getX())){
                v2.setX(v2.getX() * sX - envelope.getMenor().getX());
                //Modifica a borda direita do envelope
-               if(v2.getX().compareTo(envelope.getMaior().getX()) > 0){
-                   envelope.getMaior().setX(v2.getX());
+               if(v2.getX().compareTo(novoXMaior) > 0){
+                   novoXMaior = v2.getX();
                }
             }
             //Modifica apenas se o ponto não for parte da lateral inferior do envelope
             if(!v2.getY().equals(envelope.getMenor().getY())){
                v2.setY(v2.getY() * sY - envelope.getMenor().getY()); 
                 //Modifica a borda superior do envelope
-               if(v2.getY().compareTo(envelope.getMaior().getY()) > 0){
-                   envelope.getMaior().setY(v2.getY());
+               if(v2.getY().compareTo(novoYMaior) > 0){
+                   novoYMaior = v2.getY();
                }
             }
-            
         }
+        //Modifica a borda direita do envelope
+        if(novoXMaior.compareTo(envelope.getMaior().getX()) > 0){
+            envelope.getMaior().setX(novoXMaior);
+        }
+        //Modifica a borda superior do envelope
+        if(novoYMaior.compareTo(envelope.getMaior().getY()) > 0){
+            envelope.getMaior().setY(novoYMaior);
+        }
+        
     }
     
 }
