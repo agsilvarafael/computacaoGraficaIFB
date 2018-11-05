@@ -20,6 +20,11 @@ public class Aresta {
         this.indiceDestino = indiceDestino;
     }
 
+    public Aresta(Vertice2D origem, Vertice2D destino) {
+        this.indiceOrigem = origem.getIndice();
+        this.indiceDestino = destino.getIndice();
+    }
+    
     public Aresta(Integer indice, Integer indiceOrigem, Integer indiceDestino) {
         this.indice = indice;
         this.indiceOrigem = indiceOrigem;

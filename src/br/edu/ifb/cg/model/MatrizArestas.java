@@ -16,12 +16,12 @@ import java.util.Map;
 public class MatrizArestas {
     
     private Integer maiorIndice;
-    private Map<Integer, Aresta> matriz = new HashMap<>();
+    private Map<Integer, Aresta> matriz;
     private static MatrizArestas uniqueInstance;
 
     private MatrizArestas() {
         this.maiorIndice = -1;
-        this.matriz = new HashMap<>();
+        matriz = new HashMap<Integer, Aresta>();
     }
     
     public static synchronized MatrizArestas getInstance(){

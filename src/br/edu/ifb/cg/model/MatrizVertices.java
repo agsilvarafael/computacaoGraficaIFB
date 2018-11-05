@@ -17,12 +17,12 @@ import java.util.Map;
 public class MatrizVertices {
 
     private Integer maiorIndice;
-    private Map<Integer, Vertice2D> matriz = new HashMap<>();
+    private Map<Integer, Vertice2D> matriz;
     private static MatrizVertices uniqueInstance;
 
     private MatrizVertices() {
         this.maiorIndice = -1;
-        matriz = new HashMap<>();
+        matriz = new HashMap<Integer, Vertice2D>();
     }
     
     public static synchronized MatrizVertices getInstance(){
@@ -73,7 +73,7 @@ public class MatrizVertices {
      * @return Uma lista contendo todos os vértices dentro do 
      */
     public ArrayList<Vertice2D> getVertices(Integer inicio, Integer fim){
-        ArrayList<Vertice2D> l = new ArrayList<>();
+        ArrayList<Vertice2D> l = new ArrayList<Vertice2D>();
         for (int i = inicio; i <= fim; i++) {
             l.add(matriz.get(i));
         }

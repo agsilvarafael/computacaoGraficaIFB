@@ -8,6 +8,7 @@ package br.edu.ifb.cg.util;
 import br.edu.ifb.cg.model.MatrizArestas;
 import br.edu.ifb.cg.model.MatrizPoligonos;
 import br.edu.ifb.cg.model.MatrizVertices;
+import br.edu.ifb.cg.model.Vertice2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,7 +29,7 @@ public class Salvamento {
         url += "/" +
             JOptionPane.showInputDialog(null, "Nome do arquivo de salvamento",
                     "Nome salvamento", JOptionPane.QUESTION_MESSAGE)
-            + ".bin";
+            + ".txt";
         
         try{
             FileOutputStream fos = new FileOutputStream(url);
@@ -37,6 +38,19 @@ public class Salvamento {
             oos.writeObject(MatrizVertices.getInstance());
             oos.writeObject(MatrizArestas.getInstance());
             oos.writeObject(MatrizPoligonos.getInstance());
+            
+//            //Escreve a quantidade de polígonos
+//            //MatrizPoligonos.getInstance().getKeys().size();
+//            for(Integer i : MatrizPoligonos.getInstance().getKeys()){
+//                //Escreve P
+//                //Escreve a cor
+//                //MatrizPoligonos.getInstance().getPoligono(i).getCorPreenchimento();
+//                for(Vertice2D v : MatrizPoligonos.getInstance().getVerticesPoligono(i)){
+//                    //Escreve os vertices como X Y
+//                    //(v.getX() + " " + v.getX());
+//                }
+//            }
+            
 
             oos.close();
             fos.close();

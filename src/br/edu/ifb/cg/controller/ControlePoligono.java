@@ -8,7 +8,7 @@ package br.edu.ifb.cg.controller;
 import br.edu.ifb.cg.model.Aresta;
 import br.edu.ifb.cg.model.MatrizArestas;
 import br.edu.ifb.cg.model.MatrizPoligonos;
-import br.edu.ifb.cg.model.MatrizVertice;
+import br.edu.ifb.cg.model.MatrizVertices;
 import br.edu.ifb.cg.model.Poligono;
 import br.edu.ifb.cg.model.Vertice2D;
 
@@ -19,12 +19,12 @@ import br.edu.ifb.cg.model.Vertice2D;
 public class ControlePoligono {
     MatrizPoligonos mp;
     MatrizArestas ma;
-    MatrizVertice mv;
+    MatrizVertices mv;
 
     public ControlePoligono() {
         mp = MatrizPoligonos.getInstance();
         ma = MatrizArestas.getInstance();
-        mv = MatrizVertice.getInstance();
+        mv = MatrizVertices.getInstance();
     }
     
     public Vertice2D addVertice(Integer x, Integer y){
@@ -39,9 +39,7 @@ public class ControlePoligono {
     public Integer addAresta(Vertice2D origem, Vertice2D destino){
         Aresta a = new Aresta(origem, destino);
         ma.addAresta(a);
-
         //TODO adicionar aresta na tela
-        
         return a.getIndice();
     }
     

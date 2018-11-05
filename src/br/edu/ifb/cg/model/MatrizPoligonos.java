@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -17,12 +18,12 @@ import java.util.Map;
 public class MatrizPoligonos {
     
     private Integer maioIndice;
-    private Map<Integer, Poligono> matriz = new HashMap<>();
+    private Map<Integer, Poligono> matriz;
     private static MatrizPoligonos uniqueInstance;
 
     private MatrizPoligonos() {
         this.maioIndice = -1;
-        this.matriz = new HashMap<>();
+        this.matriz = new HashMap<Integer, Poligono>();
     }
     
     public static synchronized MatrizPoligonos getInstance(){
@@ -49,6 +50,8 @@ public class MatrizPoligonos {
         //Remove as arestas da matriz
         MatrizArestas.getInstance().removeArestas(
                 p.getIndiceArestaInicial(), p.getIndiceArestaFinal());
+		//Remove do polígono
+		matriz.remove(indicePoligono);
     }
     
     public ArrayList<Vertice2D> getVerticesPoligono(Integer indicePoligono){
@@ -79,6 +82,10 @@ public class MatrizPoligonos {
         //Cria e salva o polígono
         addPoligono(new Poligono(iAI, iAF));
         return maioIndice;
+    }
+    
+    public Set<Integer> getKeys(){
+        return matriz.keySet();
     }
     
 }
