@@ -5,6 +5,8 @@
  */
 package br.edu.ifb.cg.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jhdra
@@ -27,8 +29,7 @@ public class Janela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelOGL = new javax.media.opengl.GLJPanel();
-        panelCoonfig = new javax.swing.JPanel();
+        panelConfig = new javax.swing.JPanel();
         labelIntegrantes = new javax.swing.JLabel();
         comboFuncoes = new javax.swing.JComboBox<String>();
         labelMenuTitulo = new javax.swing.JLabel();
@@ -45,32 +46,22 @@ public class Janela extends javax.swing.JFrame {
         labelY = new javax.swing.JLabel();
         buttonEspelhaY = new javax.swing.JButton();
         buttonEspelhaX = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        buttonSalvar = new javax.swing.JButton();
         labelEscala = new javax.swing.JLabel();
         sliderEscala = new javax.swing.JSlider();
         labelEscalaValor = new javax.swing.JLabel();
+        buttonCarregar = new javax.swing.JButton();
+        panelOGL = new javax.media.opengl.GLJPanel();
+        internalFrame = new javax.swing.JInternalFrame();
+        jColorChooser1 = new javax.swing.JColorChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("O incrível editor de polígonos 2D");
         setMinimumSize(new java.awt.Dimension(1080, 720));
         setPreferredSize(new java.awt.Dimension(1080, 700));
 
-        panelOGL.setMinimumSize(new java.awt.Dimension(800, 670));
-        panelOGL.setPreferredSize(new java.awt.Dimension(800, 600));
-
-        javax.swing.GroupLayout panelOGLLayout = new javax.swing.GroupLayout(panelOGL);
-        panelOGL.setLayout(panelOGLLayout);
-        panelOGLLayout.setHorizontalGroup(
-            panelOGLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 815, Short.MAX_VALUE)
-        );
-        panelOGLLayout.setVerticalGroup(
-            panelOGLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        panelCoonfig.setMinimumSize(new java.awt.Dimension(280, 670));
-        panelCoonfig.setPreferredSize(new java.awt.Dimension(285, 600));
+        panelConfig.setMinimumSize(new java.awt.Dimension(280, 670));
+        panelConfig.setPreferredSize(new java.awt.Dimension(285, 600));
 
         labelIntegrantes.setText("<html>\nINTEGRANTES:<br>\n- Gregory Henrique<br>\n- Jerônimo Hermano<br>\n- Rafael (H)Araujo<br>\n</html>");
         labelIntegrantes.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -79,6 +70,11 @@ public class Janela extends javax.swing.JFrame {
         comboFuncoes.setMinimumSize(new java.awt.Dimension(36, 30));
         comboFuncoes.setName(""); // NOI18N
         comboFuncoes.setPreferredSize(new java.awt.Dimension(36, 30));
+        comboFuncoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trocaModo(evt);
+            }
+        });
 
         labelMenuTitulo.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         labelMenuTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -115,15 +111,22 @@ public class Janela extends javax.swing.JFrame {
 
         buttonSelecionarCor.setText("Selecionar");
         buttonSelecionarCor.setToolTipText("");
+        buttonSelecionarCor.setEnabled(false);
         buttonSelecionarCor.setMaximumSize(new java.awt.Dimension(73, 30));
         buttonSelecionarCor.setMinimumSize(new java.awt.Dimension(73, 30));
         buttonSelecionarCor.setPreferredSize(new java.awt.Dimension(73, 30));
+        buttonSelecionarCor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelecionarCorActionPerformed(evt);
+            }
+        });
 
         labelAngulo.setText("Ângulo");
         labelAngulo.setMaximumSize(new java.awt.Dimension(41, 30));
         labelAngulo.setMinimumSize(new java.awt.Dimension(41, 30));
         labelAngulo.setPreferredSize(new java.awt.Dimension(41, 30));
 
+        spinnerAngulo.setModel(new javax.swing.SpinnerNumberModel(0, -360, 360, 1));
         spinnerAngulo.setMinimumSize(new java.awt.Dimension(39, 30));
         spinnerAngulo.setPreferredSize(new java.awt.Dimension(39, 30));
 
@@ -151,19 +154,25 @@ public class Janela extends javax.swing.JFrame {
         labelY.setPreferredSize(new java.awt.Dimension(7, 30));
 
         buttonEspelhaY.setText("Espelhar em Y");
+        buttonEspelhaY.setEnabled(false);
         buttonEspelhaY.setPreferredSize(new java.awt.Dimension(73, 30));
 
         buttonEspelhaX.setText("Espelhar em X");
+        buttonEspelhaX.setEnabled(false);
         buttonEspelhaX.setPreferredSize(new java.awt.Dimension(73, 30));
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jButton1.setText("Salvar Projeto");
+        buttonSalvar.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        buttonSalvar.setText("Salvar");
 
         labelEscala.setText("Escala");
         labelEscala.setPreferredSize(new java.awt.Dimension(38, 30));
 
-        sliderEscala.setMaximum(1000);
+        sliderEscala.setMajorTickSpacing(1);
+        sliderEscala.setMaximum(3);
+        sliderEscala.setMinimum(-3);
+        sliderEscala.setMinorTickSpacing(1);
+        sliderEscala.setPaintTicks(true);
+        sliderEscala.setValue(0);
         sliderEscala.setPreferredSize(new java.awt.Dimension(200, 30));
         sliderEscala.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -189,95 +198,148 @@ public class Janela extends javax.swing.JFrame {
 
         labelEscalaValor.setText("0.0");
 
-        javax.swing.GroupLayout panelCoonfigLayout = new javax.swing.GroupLayout(panelCoonfig);
-        panelCoonfig.setLayout(panelCoonfigLayout);
-        panelCoonfigLayout.setHorizontalGroup(
-            panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCoonfigLayout.createSequentialGroup()
+        buttonCarregar.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        buttonCarregar.setText("Carregar");
+
+        javax.swing.GroupLayout panelConfigLayout = new javax.swing.GroupLayout(panelConfig);
+        panelConfig.setLayout(panelConfigLayout);
+        panelConfigLayout.setHorizontalGroup(
+            panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfigLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelIntegrantes)
                     .addComponent(labelMenuTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelCoonfigLayout.createSequentialGroup()
-                        .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panelCoonfigLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(labelEscala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sliderEscala, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(labelEscalaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelConfigLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(labelEscala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sliderEscala, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(labelEscalaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
+                    .addGroup(panelConfigLayout.createSequentialGroup()
+                        .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonEspelhaX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buttonEspelhaY, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panelCoonfigLayout.createSequentialGroup()
+                            .addGroup(panelConfigLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(labelAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(spinnerAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(labelAnguloGraus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCoonfigLayout.createSequentialGroup()
+                            .addGroup(panelConfigLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addComponent(labelCor, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(panelCorSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buttonSelecionarCor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCoonfigLayout.createSequentialGroup()
-                                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelConfigLayout.createSequentialGroup()
+                                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labelFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(panelCoonfigLayout.createSequentialGroup()
+                                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(panelConfigLayout.createSequentialGroup()
                                         .addComponent(spinnerX, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(labelY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(spinnerY, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(comboFuncoes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(comboFuncoes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(panelConfigLayout.createSequentialGroup()
+                                .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonCarregar)))
                         .addContainerGap())))
         );
-        panelCoonfigLayout.setVerticalGroup(
-            panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCoonfigLayout.createSequentialGroup()
+        panelConfigLayout.setVerticalGroup(
+            panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfigLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelMenuTitulo)
                 .addGap(18, 18, 18)
-                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spinnerX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spinnerY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelCorSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSelecionarCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spinnerAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelAnguloGraus, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelCoonfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelEscala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sliderEscala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(labelEscala, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                        .addComponent(sliderEscala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(labelEscalaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addComponent(buttonEspelhaX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonEspelhaY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addGroup(panelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(labelIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+        );
+
+        panelOGL.setMinimumSize(new java.awt.Dimension(800, 670));
+        panelOGL.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        internalFrame.setVisible(true);
+
+        javax.swing.GroupLayout internalFrameLayout = new javax.swing.GroupLayout(internalFrame.getContentPane());
+        internalFrame.getContentPane().setLayout(internalFrameLayout);
+        internalFrameLayout.setHorizontalGroup(
+            internalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(internalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(internalFrameLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        internalFrameLayout.setVerticalGroup(
+            internalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(internalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, internalFrameLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
+        javax.swing.GroupLayout panelOGLLayout = new javax.swing.GroupLayout(panelOGL);
+        panelOGL.setLayout(panelOGLLayout);
+        panelOGLLayout.setHorizontalGroup(
+            panelOGLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOGLLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(internalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(794, Short.MAX_VALUE))
+        );
+        panelOGLLayout.setVerticalGroup(
+            panelOGLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOGLLayout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(internalFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(595, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -285,15 +347,17 @@ public class Janela extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelCoonfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelOGL, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE))
+                .addComponent(panelOGL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCoonfig, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
-            .addComponent(panelOGL, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(panelConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(panelOGL, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleParent(this);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,13 +374,45 @@ public class Janela extends javax.swing.JFrame {
         labelEscalaValor.setText( ((Integer)sliderEscala.getValue()).toString());
     }//GEN-LAST:event_sliderEscalaAncestorMoved1
 
+    private void trocaModo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trocaModo
+        Integer selecionado = comboFuncoes.getSelectedIndex();
+        switch(selecionado){
+            case 0:
+                enableCampos(false);
+                break;
+            case 1:
+                enableCampos(true);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida sleecionada!");
+        }
+    }//GEN-LAST:event_trocaModo
+
+    private void buttonSelecionarCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelecionarCorActionPerformed
+        internalFrame.setVisible(true);
+        internalFrame.setLayer(100);
+    }//GEN-LAST:event_buttonSelecionarCorActionPerformed
+
    
+    private void enableCampos(Boolean enable){
+        spinnerX.setEnabled(enable);
+        spinnerY.setEnabled(enable);
+        buttonSelecionarCor.setEnabled(enable);
+        sliderEscala.setEnabled(enable);
+        spinnerAngulo.setEnabled(enable);
+        buttonEspelhaX.setEnabled(enable);
+        buttonEspelhaY.setEnabled(enable);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCarregar;
     private javax.swing.JButton buttonEspelhaX;
     private javax.swing.JButton buttonEspelhaY;
+    private javax.swing.JButton buttonSalvar;
     private javax.swing.JButton buttonSelecionarCor;
     private javax.swing.JComboBox<String> comboFuncoes;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JInternalFrame internalFrame;
+    private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel labelAngulo;
     private javax.swing.JLabel labelAnguloGraus;
     private javax.swing.JLabel labelCor;
@@ -327,7 +423,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel labelMenuTitulo;
     private javax.swing.JLabel labelX;
     private javax.swing.JLabel labelY;
-    private javax.swing.JPanel panelCoonfig;
+    private javax.swing.JPanel panelConfig;
     private javax.swing.JPanel panelCorSelecionada;
     private javax.media.opengl.GLJPanel panelOGL;
     private javax.swing.JSlider sliderEscala;

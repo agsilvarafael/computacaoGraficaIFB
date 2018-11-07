@@ -9,7 +9,6 @@ import java.awt.EventQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
-import br.edu.ifb.cg.view.Frame;
 import br.edu.ifb.cg.view.Janela;
 
 /**
@@ -25,7 +24,7 @@ public class NewMain {
         // Run this in the AWT event thread to prevent deadlocks and race conditions
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                 
                 // switch to system l&f for native font rendering etc.
                 try{
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -33,7 +32,6 @@ public class NewMain {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, "can not enable system look and feel", ex);
                 }
                 
-//                Frame frame = new Frame();
                 Janela frame = new Janela();
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);

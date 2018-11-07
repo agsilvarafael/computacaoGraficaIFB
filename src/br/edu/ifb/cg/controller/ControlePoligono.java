@@ -10,16 +10,11 @@ import br.edu.ifb.cg.model.Vertice2D;
  * @author jeronimo
  */
 public class ControlePoligono {
-<<<<<<< HEAD:src/br/edu/ifb/cg/controller/ControlePoligono.java
-    MatrizPoligonos mp;
-    MatrizArestas ma;
-    MatrizVertices mv;
-
-=======
+    
     private MatrizPoligonos mp;
     private MatrizArestas ma;
-    private MatrizVertice mv;
->>>>>>> 66e2c800878ab22f9d39dd0a18d9f4fad7221238:src/main/java/br/edu/ifb/cg/controller/ControlePoligono.java
+    private MatrizVertices mv;
+    
     public ControlePoligono() {
         mp = MatrizPoligonos.getInstance();
         ma = MatrizArestas.getInstance();
@@ -38,12 +33,8 @@ public class ControlePoligono {
     public Integer addAresta(Vertice2D origem, Vertice2D destino){
         Aresta a = new Aresta(origem, destino);
         ma.addAresta(a);
-<<<<<<< HEAD:src/br/edu/ifb/cg/controller/ControlePoligono.java
         //TODO adicionar aresta na tela
-=======
          //TODO adicionar aresta na tela
-        
->>>>>>> 66e2c800878ab22f9d39dd0a18d9f4fad7221238:src/main/java/br/edu/ifb/cg/controller/ControlePoligono.java
         return a.getIndice();
     }
     
